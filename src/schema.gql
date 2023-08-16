@@ -1,4 +1,0 @@
-type Query {
-  customer: CustomerModel
-  invoice: InvoiceModel
-}
