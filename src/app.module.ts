@@ -4,8 +4,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
