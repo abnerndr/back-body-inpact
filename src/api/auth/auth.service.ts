@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthBody } from './types';
 import * as bcrypt from 'bcrypt';
@@ -17,8 +22,15 @@ export class AuthService {
   async signIn(body: AuthBody) {
     const { email, password } = body;
     const user = await this.userService.findOne({ where: { email } });
+    if (!user) {
+      new HttpException(
+        'usuário ou senhã não encontrados na base de dados',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    console.log(user?.password);
     const passIsVerify = await bcrypt.compare(password, user?.password);
-    console.log(passIsVerify);
+    console.log(passIsVerify, 'ss');
     if (!passIsVerify) {
       throw new UnauthorizedException();
     }
